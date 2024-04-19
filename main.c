@@ -525,6 +525,7 @@ static void set_fullscreen(GtkWindow *win, int monitor, gboolean keyboard)
 {
     GdkMonitor *mon =
         gdk_display_get_monitor(gdk_display_get_default(), monitor);
+    (void) mon;
 
     if (protocol && layershell)
     {
