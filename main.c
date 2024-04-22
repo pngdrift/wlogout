@@ -94,11 +94,10 @@ static const char *help =
 static gboolean process_args(int argc, char *argv[])
 {
 
-    int c;
     while (TRUE)
     {
         int option_index = 0;
-        c = getopt_long(argc, argv, "hl:vc:m:b:T:R:L:B:r:c:p:C:sP:n",
+        int c = getopt_long(argc, argv, "hl:vc:m:b:T:R:L:B:r:c:p:C:sP:n",
                         long_options, &option_index);
         if (c == -1)
         {
@@ -342,6 +341,7 @@ static gboolean get_buttons(FILE *json)
     jsmntok_t *tok = malloc(default_size * sizeof(jsmntok_t));
     if (!tok)
     {
+        free(buffer);
         g_warning("Failed to allocate memory\n");
         return TRUE;
     }
