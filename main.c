@@ -523,13 +523,11 @@ static gboolean check_key(GtkWidget *widget, GdkEventKey *event, gpointer data)
 
 static void set_fullscreen(GtkWindow *win, int monitor, gboolean keyboard)
 {
-    GdkMonitor *mon =
-        gdk_display_get_monitor(gdk_display_get_default(), monitor);
-    (void) mon;
-
     if (protocol && layershell)
     {
 #ifdef LAYERSHELL
+        GdkMonitor *mon =
+            gdk_display_get_monitor(gdk_display_get_default(), monitor);
         gtk_layer_init_for_window(win);
         gtk_layer_set_layer(win, GTK_LAYER_SHELL_LAYER_OVERLAY);
         gtk_layer_set_namespace(win, "logout_dialog");
