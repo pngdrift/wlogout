@@ -6,7 +6,7 @@ wlogout - A Wayland logout menu
 
 # SYNOPSIS
 
-*wlogout* [options] [command]
+*wlogout* [options...]
 
 # OPTIONS
 

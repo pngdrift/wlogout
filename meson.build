@@ -1,7 +1,7 @@
 project(
   'wlogout',
   'c',
-  version: '1.1.1',
+  version: '1.2.1',
   license: 'MIT',
   default_options:
   [
@@ -19,9 +19,15 @@ add_project_arguments(
   language: 'c'
 )
 
+# Set version in config.h
+conf_data = configuration_data()
+conf_data.set('PROJECT_VERSION', '"@0@"'.format(meson.project_version()))
+configure_file(output: 'config.h', configuration: conf_data)
+
 datadir = get_option('datadir')
 sysconfdir = get_option('sysconfdir')
 
+# Build man pages
 scdoc = dependency('scdoc', native: true, required: get_option('man-pages'))
 if scdoc.found()
   scdoc_prog = find_program(scdoc.get_pkgconfig_variable('scdoc'), native: true)
@@ -68,7 +74,7 @@ gtk = dependency('gtk+-wayland-3.0')
 layershell = dependency('gtk-layer-shell-0', required : false)
 
 if layershell.found()
-    add_project_arguments('-DLAYERSHELL=1', language : 'c')
+  add_project_arguments('-DLAYERSHELL=1', language : 'c')
 endif
 
 install_subdir('assets', install_dir : datadir / 'wlogout')
